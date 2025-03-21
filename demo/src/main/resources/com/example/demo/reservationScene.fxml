@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -12,29 +13,21 @@
 <?import javafx.scene.text.Font?>
 
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" type="BorderPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ReservationController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ReservationController">
    <top>
       <AnchorPane prefHeight="120.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" layoutX="174.0" layoutY="34.0" text="Reservation" textFill="#1400f4">
+            <Label alignment="CENTER" layoutX="174.0" layoutY="34.0" text="Reservation" textFill="#1504ff">
                <font>
                   <Font size="49.0" />
                </font>
             </Label>
+            <Label fx:id="lableText" layoutX="68.0" layoutY="52.0" />
          </children>
       </AnchorPane>
    </top>
-   <bottom>
-      <TableView prefHeight="382.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="C3" />
-        </columns>
-      </TableView>
-   </bottom>
    <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="90.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
@@ -48,8 +41,40 @@
                      </VBox.margin>
                   </TextField>
                </children>
+               <HBox.margin>
+                  <Insets right="150.0" />
+               </HBox.margin>
             </VBox>
+            <Button fx:id="ajouerButton" mnemonicParsing="false"  prefHeight="30.0" prefWidth="68.0" text="Ajouter">
+               <HBox.margin>
+                  <Insets right="50.0" top="30.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="modiferButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="78.0" text="Modifer">
+               <HBox.margin>
+                  <Insets right="50.0" top="30.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="supprimerButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="76.0" text="Suprimer">
+               <HBox.margin>
+                  <Insets right="50.0" top="30.0" />
+               </HBox.margin>
+            </Button>
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </HBox>
    </center>
-</fx:root>
+   <bottom>
+      <TableView prefHeight="387.0" prefWidth="538.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn prefWidth="87.20001220703125" text="Code " />
+            <TableColumn prefWidth="123.20001220703125" text="dure de Reservation" />
+          <TableColumn prefWidth="92.00006103515625" text="Nom Employe" />
+            <TableColumn prefWidth="75.199951171875" text="Date" />
+            <TableColumn prefWidth="76.79998779296875" text="heure" />
+        </columns>
+      </TableView>
+   </bottom>
+</BorderPane>
