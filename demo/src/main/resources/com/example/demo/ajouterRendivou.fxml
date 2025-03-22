@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AjouterRendivouController">
+   <bottom>
+      <AnchorPane prefHeight="421.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="confimerReservationButton" layoutX="276.0" layoutY="368.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="76.0" text="Confirmer" />
+            <Label layoutX="54.0" layoutY="14.0" prefHeight="18.0" prefWidth="79.0" text="Name :">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField layoutX="19.0" layoutY="45.0" />
+            <Label layoutX="293.0" layoutY="14.0" prefHeight="26.0" prefWidth="118.0" text="Date et houre :">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <DatePicker layoutX="265.0" layoutY="45.0" />
+            <Label alignment="CENTER" layoutX="54.0" layoutY="90.0" prefHeight="18.0" prefWidth="79.0" text="Dure :">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField layoutX="19.0" layoutY="116.0" />
+            <Button fx:id="retoureToMainButton" layoutX="129.0" layoutY="368.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="38.0" prefWidth="102.0" text="cancel" textAlignment="CENTER" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <top>
+      <Label alignment="CENTER" text="Ajouter Votre Reservation :" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Bodoni MT" size="25.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+</BorderPane>

@@ -18,7 +18,6 @@ public class ReservationApplication extends Application {
             stage.show();
         } catch (IOException e) {
             System.err.println("Error loading FXML file: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 

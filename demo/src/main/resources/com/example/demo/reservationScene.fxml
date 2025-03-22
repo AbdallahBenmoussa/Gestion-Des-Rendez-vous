@@ -9,55 +9,42 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ReservationController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ReservationController">
    <top>
       <AnchorPane prefHeight="120.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" layoutX="174.0" layoutY="34.0" text="Reservation" textFill="#1504ff">
+            <Label alignment="CENTER" layoutX="174.0" layoutY="34.0" text="Reservation">
                <font>
                   <Font size="49.0" />
                </font>
             </Label>
-            <Label fx:id="lableText" layoutX="68.0" layoutY="52.0" />
          </children>
       </AnchorPane>
    </top>
    <center>
       <HBox prefHeight="90.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="102.0" text="Search" />
-                  <TextField prefHeight="26.0" prefWidth="100.0">
-                     <padding>
-                        <Insets top="20.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </TextField>
-               </children>
+            <Label alignment="CENTER" prefHeight="29.0" prefWidth="102.0" text="Search :" textAlignment="CENTER">
                <HBox.margin>
-                  <Insets right="150.0" />
+                  <Insets right="30.0" top="25.0" />
                </HBox.margin>
-            </VBox>
-            <Button fx:id="ajouerButton" mnemonicParsing="false"  prefHeight="30.0" prefWidth="68.0" text="Ajouter">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <TextField prefHeight="35.0" prefWidth="146.0" promptText="Code ">
+               <padding>
+                  <Insets left="10.0" right="30.0" top="20.0" />
+               </padding>
                <HBox.margin>
-                  <Insets right="50.0" top="30.0" />
+                  <Insets right="150.0" top="20.0" />
                </HBox.margin>
-            </Button>
-            <Button fx:id="modiferButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="78.0" text="Modifer">
+            </TextField>
+            <Button fx:id="ajouerButton" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="38.0" prefWidth="101.0" text="Ajouter">
                <HBox.margin>
-                  <Insets right="50.0" top="30.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="supprimerButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="76.0" text="Suprimer">
-               <HBox.margin>
-                  <Insets right="50.0" top="30.0" />
+                  <Insets right="50.0" top="15.0" />
                </HBox.margin>
             </Button>
          </children>
@@ -67,13 +54,14 @@
       </HBox>
    </center>
    <bottom>
-      <TableView prefHeight="387.0" prefWidth="538.0" BorderPane.alignment="CENTER">
+      <TableView prefHeight="387.0" prefWidth="538.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="87.20001220703125" text="Code " />
-            <TableColumn prefWidth="123.20001220703125" text="dure de Reservation" />
-          <TableColumn prefWidth="92.00006103515625" text="Nom Employe" />
-            <TableColumn prefWidth="75.199951171875" text="Date" />
-            <TableColumn prefWidth="76.79998779296875" text="heure" />
+          <TableColumn prefWidth="87.20001220703125" style="-fx-background-color: grey;" text="Code " />
+            <TableColumn prefWidth="123.20001220703125" style="-fx-background-color: grey;" text="dure de Reservation" />
+          <TableColumn prefWidth="92.00006103515625" style="-fx-background-color: grey;" text="Nom Employe" />
+            <TableColumn prefWidth="75.199951171875" style="-fx-background-color: grey;" text="Date" />
+            <TableColumn prefWidth="76.79998779296875" style="-fx-background-color: grey;" text="heure" />
+            <TableColumn prefWidth="142.4000244140625" style="-fx-background-color: grey;" text="Action : (supp / modifer)" />
         </columns>
       </TableView>
    </bottom>

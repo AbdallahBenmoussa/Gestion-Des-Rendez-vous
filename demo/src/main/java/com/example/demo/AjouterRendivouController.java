@@ -6,33 +6,30 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-public class ReservationController {
+public class AjouterRendivouController {
 
     @FXML
-    private Button ajouerButton;
+    private Button confimerReservationButton;
 
     @FXML
-    private Button modiferButton;
-
-    @FXML
-    private Button supprimerButton;
+    private Button retoureToMainButton;
 
     private Stage stage;
     private Scene scene;
     private Parent root;
 
 
-    public void switchToMenu(javafx.event.ActionEvent actionEvent) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("ajouterRendivou.fxml"));
+    public void backToMenu(javafx.event.ActionEvent actionEvent) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("reservationScene.fxml"));
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
+
+
 }
