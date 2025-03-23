@@ -8,61 +8,59 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ReservationController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ReservationController">
    <top>
-      <AnchorPane prefHeight="120.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="182.0" prefWidth="604.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" layoutX="174.0" layoutY="34.0" text="Reservation">
+            <Button fx:id="exitButton" alignment="TOP_RIGHT" minWidth="50.0" mnemonicParsing="false" onAction="#exit" prefHeight="22.0" prefWidth="50.0" style="-fx-background-color: white;" text="X" textAlignment="RIGHT" textFill="RED">
+               <VBox.margin>
+                  <Insets left="550.0" />
+               </VBox.margin>
+            </Button>
+            <Label alignment="CENTER" prefHeight="51.0" prefWidth="600.0" text="Reservation">
                <font>
-                  <Font size="49.0" />
+                  <Font size="30.0" />
                </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
             </Label>
+            <TextField prefHeight="49.0" prefWidth="280.0" promptText="Search">
+               <VBox.margin>
+                  <Insets left="170.0" right="170.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
          </children>
-      </AnchorPane>
+      </VBox>
    </top>
    <center>
-      <HBox prefHeight="90.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="156.0" prefWidth="600.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="29.0" prefWidth="102.0" text="Search :" textAlignment="CENTER">
-               <HBox.margin>
-                  <Insets right="30.0" top="25.0" />
-               </HBox.margin>
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Label>
-            <TextField prefHeight="35.0" prefWidth="146.0" promptText="Code ">
-               <padding>
-                  <Insets left="10.0" right="30.0" top="20.0" />
-               </padding>
-               <HBox.margin>
-                  <Insets right="150.0" top="20.0" />
-               </HBox.margin>
-            </TextField>
-            <Button fx:id="ajouerButton" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="38.0" prefWidth="101.0" text="Ajouter">
-               <HBox.margin>
-                  <Insets right="50.0" top="15.0" />
-               </HBox.margin>
-            </Button>
+            <Button fx:id="ajouterButton" layoutX="94.0" layoutY="55.0" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="60.0" prefWidth="84.0" style="-fx-background-color: white;" text="Ajouter :" textFill="#101010" />
+            <Button fx:id="ajouterButton1" layoutX="258.0" layoutY="55.0" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="60.0" prefWidth="84.0" style="-fx-background-color: white;" text="Modifer :" textFill="#101010" />
+            <Button fx:id="ajouterButton11" layoutX="423.0" layoutY="55.0" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="60.0" prefWidth="84.0" style="-fx-background-color: white;" text="Supp :" textFill="#101010" />
          </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </HBox>
+      </AnchorPane>
    </center>
    <bottom>
-      <TableView prefHeight="387.0" prefWidth="538.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn prefWidth="87.20001220703125" style="-fx-background-color: grey;" text="Code " />
-            <TableColumn prefWidth="123.20001220703125" style="-fx-background-color: grey;" text="dure de Reservation" />
-          <TableColumn prefWidth="92.00006103515625" style="-fx-background-color: grey;" text="Nom Employe" />
-            <TableColumn prefWidth="75.199951171875" style="-fx-background-color: grey;" text="Date" />
-            <TableColumn prefWidth="76.79998779296875" style="-fx-background-color: grey;" text="heure" />
-            <TableColumn prefWidth="142.4000244140625" style="-fx-background-color: grey;" text="Action : (supp / modifer)" />
-        </columns>
-      </TableView>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView layoutX="67.0" prefHeight="296.0" prefWidth="466.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3px 3px 3px 3px;">
+               <columns>
+                  <TableColumn prefWidth="75.0" style="-fx-border-color: black;" text="Code " />
+                  <TableColumn prefWidth="93.59996032714844" style="-fx-border-color: black;" text="Nom Emp " />
+                  <TableColumn prefWidth="94.4000244140625" style="-fx-border-color: black;" text="Date debut " />
+                  <TableColumn prefWidth="125.5999755859375" style="-fx-border-color: black;" text="Date Fin " />
+                  <TableColumn prefWidth="92.79998779296875" style="-fx-border-color: black;" text="Action " />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
    </bottom>
 </BorderPane>

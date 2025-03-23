@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -9,30 +10,37 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AjouterRendivouController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AjouterRendivouController">
    <bottom>
       <AnchorPane prefHeight="421.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="confimerReservationButton" layoutX="276.0" layoutY="368.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="76.0" text="Confirmer" />
-            <Label layoutX="54.0" layoutY="14.0" prefHeight="18.0" prefWidth="79.0" text="Name :">
+            <Button fx:id="confimerReservationButton" layoutX="276.0" layoutY="368.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="94.0" text="Confirmer" />
+            <Label layoutX="67.0" layoutY="14.0" prefHeight="18.0" prefWidth="79.0" text="Nome :">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <TextField layoutX="19.0" layoutY="45.0" />
-            <Label layoutX="293.0" layoutY="14.0" prefHeight="26.0" prefWidth="118.0" text="Date et houre :">
+            <TextField layoutX="19.0" layoutY="45.0" prefHeight="26.0" prefWidth="170.0" />
+            <Label layoutX="312.0" layoutY="14.0" prefHeight="26.0" prefWidth="118.0" text="Date debut :">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <DatePicker layoutX="265.0" layoutY="45.0" />
-            <Label alignment="CENTER" layoutX="54.0" layoutY="90.0" prefHeight="18.0" prefWidth="79.0" text="Dure :">
+            <DatePicker layoutX="293.0" layoutY="45.0" />
+            <Label alignment="CENTER" layoutX="54.0" layoutY="90.0" prefHeight="18.0" prefWidth="79.0" text="Date Fin">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <TextField layoutX="19.0" layoutY="116.0" />
             <Button fx:id="retoureToMainButton" layoutX="129.0" layoutY="368.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="38.0" prefWidth="102.0" text="cancel" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="341.0" layoutY="90.0" prefHeight="18.0" prefWidth="79.0" text="La Salle :">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <ComboBox layoutX="292.0" layoutY="127.0" prefHeight="26.0" prefWidth="177.0" />
+            <Label fx:id="messageLable" layoutX="177.0" layoutY="247.0" prefHeight="18.0" prefWidth="142.0" />
+            <DatePicker layoutX="19.0" layoutY="128.0" />
          </children>
       </AnchorPane>
    </bottom>

@@ -9,7 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import javax.swing.text.html.ImageView;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 public class ReservationController {
@@ -18,10 +20,17 @@ public class ReservationController {
     private Button ajouerButton;
 
     @FXML
-    private Button modiferButton;
+    private Button modifferButton;
 
     @FXML
-    private Button supprimerButton;
+    private Button suppButton;
+
+    @FXML
+    private ImageView ajouterImage;
+
+
+    @FXML
+    private Button exitButton ;
 
     private Stage stage;
     private Scene scene;
@@ -35,4 +44,9 @@ public class ReservationController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void exit(){
+        System.exit(0);
+    }
+
 }
