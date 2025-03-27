@@ -1,85 +1,86 @@
-
 #background{
-    -fx-background-color: #18314F;
+
+    -fx-background-color: radial-gradient(center 0% 0%, radius 150%, #444D56, #30362F);
 }
 #h1_label{
     -fx-background-radius: 10px;
-    -fx-background-color: #384E77;
-    -fx-effect: dropshadow(three-pass-box, #0D0630, 2, 0.2, 2, 2);
-    -fx-background-color: linear-gradient(to right, #384E77 70%, #18314F 100%);
+    -fx-background-color: #AEAAAB;
+    -fx-effect: dropshadow(three-pass-box, #191919, 2, 0.2, 2, 2);
 }
 #left_anchorpane{
     -fx-background-radius: 10px;
-    -fx-background-color: #384E77;
-    -fx-effect: dropshadow(three-pass-box, #0D0630, 2, 0.2, 2, 2);
+    -fx-background-color: #AEAAAB;
+    -fx-effect: dropshadow(three-pass-box, #191919, 2, 0.2, 2, 2);
 }
 #b_AjoutezReservation{
-    -fx-background-color: #E6F9AF;
-    -fx-text-fill: #18314F;
+    -fx-background-color: #605856;
+    -fx-text-fill: #FBFCFF;
     -fx-background-radius: 10px;
-    -fx-effect: dropshadow(three-pass-box, #0D0630, 2, 0.2, 2, 2);
+    -fx-effect: dropshadow(three-pass-box, #191919, 2, 0.2, 2, 2);
 }
 #b_VoirLesSalleDisponible{
-    -fx-background-color: #E6F9AF;
+    -fx-background-color: #605856;
     -fx-background-radius: 10px;
-    -fx-text-fill: #18314F;
-    -fx-effect: dropshadow(three-pass-box, #0D0630, 2, 0.2, 2, 2);
+    -fx-text-fill: #FBFCFF;
+    -fx-effect: dropshadow(three-pass-box, #191919, 2, 0.2, 2, 2);
 }
 #b_Recherche{
-    -fx-background-color: #E6F9AF;
-    -fx-text-fill: #18314F;
+    -fx-background-color: #605856;
+    -fx-text-fill: #FBFCFF;
     -fx-background-radius: 10px;
-    -fx-effect: dropshadow(three-pass-box, #0D0630, 2, 0.2, 2, 2);
+    -fx-effect: dropshadow(three-pass-box, #191919, 2, 0.2, 2, 2);
 }
 
 #b_AjoutezReservation:hover {
-    -fx-background-color: #18314F;
-    -fx-text-fill: #E6F9AF;
+    -fx-background-color: #FBFCFF;
+    -fx-text-fill: #444D56;
     -fx-background-radius: 10px;
-    -fx-effect: dropshadow(three-pass-box, #0D0630, 6, 0.5, 3, 3);
+    -fx-effect: dropshadow(three-pass-box, #191919, 6, 0.5, 3, 3);
 }
 #b_VoirLesSalleDisponible:hover{
-    -fx-background-color: #18314F;
-    -fx-text-fill: #E6F9AF;
+    -fx-background-color: #FBFCFF;
+    -fx-text-fill: #444D56;
     -fx-background-radius: 10px;
-    -fx-effect: dropshadow(three-pass-box, #0D0630, 6, 0.5, 3, 3);
-
+    -fx-effect: dropshadow(three-pass-box, #191919, 6, 0.5, 3, 3);
 }
 #b_Recherche:hover{
-    -fx-background-color: #18314F;
-    -fx-text-fill: #E6F9AF;
+    -fx-background-color: #FBFCFF;
+    -fx-text-fill: #444D56;
     -fx-background-radius: 10px;
-    -fx-effect: dropshadow(three-pass-box, #0D0630, 6, 0.5, 3, 3);
-
+    -fx-effect: dropshadow(three-pass-box, #191919, 6, 0.5, 3, 3);
 }
 #LeftBottom_anchor{
     -fx-background-radius: 10px;
-    -fx-background-color: #384E77;
-    -fx-effect: dropshadow(three-pass-box, #0D0630, 2, 0.2, 2, 2);
+    -fx-background-color: #AEAAAB;
+    -fx-effect: dropshadow(three-pass-box, #191919, 2, 0.2, 2, 2);
 }
 #exit_label{
     -fx-background-radius: 10px 0px 0px 10px;
-    -fx-background-color: #E6F9AF;
+    -fx-background-color: #605856;
+    -fx-effect: dropshadow(three-pass-box, #191919, 2, 0.2, 2, 2);
 }
 #closeButton{
     -fx-background-color: transparent;
-    -fx-text-fill: #0D0630;
+    -fx-text-fill: white;
     -fx-background-radius: 10px 0px 0px 0px;
+
 }
 #minimizeButton{
     -fx-background-color: transparent;
-    -fx-text-fill: #0D0630;
+    -fx-text-fill: white;
     -fx-font-size: 20px;
     -fx-background-radius: 0px 0px 0px 10px;
 }
 #minimizeButton:hover{
     -fx-font-size: 20px;
-    -fx-background-color: #8BBEB2;
+    -fx-background-color: #AEAAAB;
     -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, #191919, 2, 0.2, 2, 2);
 }
 #closeButton:hover{
     -fx-background-color: red;
     -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, #191919, 2, 0.2, 2, 2);
 }
 
 
@@ -91,13 +92,12 @@
 
 #table_anchor {
     -fx-background-radius: 10px;
-    -fx-background-color: #384E77;
-    -fx-effect: dropshadow(three-pass-box, #0D0630, 2, 0.2, 2, 2);
-    -fx-background-color: radial-gradient(center 0% 0%, radius 100%, #384E77 60%, #18314F 100%);
+    -fx-background-color: #efeeef;
+    -fx-effect: dropshadow(three-pass-box, #191919, 2, 0.2, 2, 2);
 }
 .table-view{
     -fx-background-color:transparent;
-    -fx-border-color:linear-gradient(to bottom right, #18314F 10%, #0D0630 100%);
+    -fx-border-color:#605856;
     -fx-border-radius:10px;
     -fx-padding:0px;
 }
@@ -106,7 +106,7 @@
 
 }
 .table-view .column-header-background{
-    -fx-background-color:linear-gradient(to bottom right, #18314F 35%, #0D0630 100%);
+    -fx-background-color:#605856;
     -fx-background-insets: 0;
     -f-background-radius:8px 8px 0px 0px;
 }
@@ -115,6 +115,20 @@
     -fx-size:40px;
 }
 .table-view .column-header .label{
-    -fx-text-fill:#fff;
+    -fx-text-fill:#efeeef;
     -fx-font-family:"Arial";
+}
+
+
+
+
+
+
+
+
+#search_anchor{
+    -fx-background-color: red;
+}
+#add_anchor{
+    -fx-background-color: yellow;
 }
