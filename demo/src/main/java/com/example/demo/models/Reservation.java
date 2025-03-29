@@ -10,7 +10,7 @@ public class Reservation {
     private Date dateRes;
     private Time heureDebut;
     private Time duree;
-
+    private boolean selected;
 
     public Reservation(String nomEmp, Salle salle, Date dateRes, Time heureDebut, Time duree) {
         this.nomEmp = nomEmp;
@@ -21,9 +21,7 @@ public class Reservation {
         this.numRes = generateId();
     }
 
-
-    public Reservation(int numRes, String nomEmp, Salle salle,
-                       Date dateRes, Time heureDebut, Time duree) {
+    public Reservation(int numRes, String nomEmp, Salle salle, Date dateRes, Time heureDebut, Time duree) {
         this.numRes = numRes;
         this.nomEmp = nomEmp;
         this.salle = salle;
@@ -32,37 +30,55 @@ public class Reservation {
         this.duree = duree;
     }
 
-    private int generateId() {
-        return (salle.getBatiment() + salle.getCodeSalle() +
-                dateRes.toString() + heureDebut.toString()).hashCode();
+    public boolean isSelected() {
+        return selected;
     }
 
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 
     public int getNumRes() {
-        return numRes; }
-    public String getNomEmp() {
-        return nomEmp; }
-    public Salle getSalle() {
-        return salle; }
-    public String getCodeSalle() {
-        return salle.getCodeSalle(); }
-    public Date getDateRes() {
-        return dateRes; }
-    public Time getHeureDebut() {
-        return heureDebut; }
-    public Time getDuree() {
-        return duree; }
+        return numRes;
+    }
 
+    public String getNomEmp() {
+        return nomEmp;
+    }
+
+    public Salle getSalle() {
+        return salle;
+    }
+
+    public String getCodeSalle() {
+        return salle.getCodeSalle();
+    }
+
+    public Date getDateRes() {
+        return dateRes;
+    }
+
+    public Time getHeureDebut() {
+        return heureDebut;
+    }
+
+    public Time getDuree() {
+        return duree;
+    }
 
     public String getDureeFormatted() {
         if (duree == null) return "";
         return String.format("%d:%02d", duree.getHours(), duree.getMinutes());
     }
 
-
     public String getDateTimeFormatted() {
         if (dateRes == null || heureDebut == null) return "";
         return String.format("%td/%<tm/%<tY %<tH:%<tM",
                 new java.util.Date(dateRes.getTime() + heureDebut.getTime()));
+    }
+
+    private int generateId() {
+        return (salle.getBatiment() + salle.getCodeSalle() +
+                dateRes.toString() + heureDebut.toString()).hashCode();
     }
 }

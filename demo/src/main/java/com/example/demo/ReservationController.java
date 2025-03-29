@@ -4,17 +4,18 @@ import com.example.demo.controllers.DatabaseController;
 import com.example.demo.models.Reservation;
 import javafx.animation.*;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -23,6 +24,8 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ReservationController {
 
@@ -33,8 +36,9 @@ public class ReservationController {
     @FXML private TableColumn<Reservation, String> colEmploye;
     @FXML private TableColumn<Reservation, String> colDateTime;
     @FXML private TableColumn<Reservation, String> colDuree;
-    @FXML private TableColumn<?, ?> Action;
+    @FXML private TableColumn<Reservation, Void> colAction;
     @FXML private TextField searchField;
+    @FXML private Button deleteSelectedButton;
 
     // Panes and anchors
     @FXML private Pane add_anchor;
@@ -72,6 +76,7 @@ public class ReservationController {
         setupWindowDrag();
         loadReservations();
         setupSearchListener();
+        setupDeleteButton();
     }
 
     private void setupTableColumns() {
@@ -79,15 +84,70 @@ public class ReservationController {
         colSalle.setCellValueFactory(new PropertyValueFactory<>("codeSalle"));
         colEmploye.setCellValueFactory(new PropertyValueFactory<>("nomEmp"));
 
-        colDateTime.setCellValueFactory(cellData -> {
-            Reservation res = cellData.getValue();
-            return new SimpleStringProperty(res.getDateTimeFormatted());
-        });
+        colDateTime.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getDateTimeFormatted()));
 
-        colDuree.setCellValueFactory(cellData -> {
-            Reservation res = cellData.getValue();
-            return new SimpleStringProperty(res.getDureeFormatted());
+        colDuree.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getDureeFormatted()));
+
+        // Checkbox column setup
+        colAction.setCellFactory(column -> new TableCell<Reservation, Void>() {
+            private final CheckBox checkBox = new CheckBox();
+            private final HBox container = new HBox(checkBox);
+
+            {
+                container.setAlignment(Pos.CENTER);
+                checkBox.setOnAction(event -> {
+                    Reservation res = getTableView().getItems().get(getIndex());
+                    res.setSelected(checkBox.isSelected());
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    Reservation res = getTableView().getItems().get(getIndex());
+                    checkBox.setSelected(res.isSelected());
+                    setGraphic(container);
+                }
+            }
         });
+    }
+
+    private void setupDeleteButton() {
+        deleteSelectedButton.setOnAction(event -> deleteSelectedReservations());
+    }
+
+    private void deleteSelectedReservations() {
+        List<Reservation> selected = allReservations.stream()
+                .filter(Reservation::isSelected)
+                .collect(Collectors.toList());
+
+        if (selected.isEmpty()) {
+            showAlert("Aucune sélection", "Veuillez sélectionner au moins une réservation à supprimer");
+            return;
+        }
+
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("Confirmation de suppression");
+        confirmation.setHeaderText("Supprimer les réservations sélectionnées");
+        confirmation.setContentText("Êtes-vous sûr de vouloir supprimer " + selected.size() + " réservation(s) ?");
+
+        Optional<ButtonType> result = confirmation.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                DatabaseController db = new DatabaseController();
+                for (Reservation res : selected) {
+                    db.supprimerReservation(res.getNumRes());
+                }
+                loadReservations();
+            } catch (SQLException e) {
+                showAlert("Erreur", "Échec de la suppression: " + e.getMessage());
+            }
+        }
     }
 
     private void setupWindowDrag() {
