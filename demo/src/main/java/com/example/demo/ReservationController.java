@@ -59,6 +59,9 @@ public class ReservationController {
     @FXML private TextField ajout_nom;
     @FXML private TextField ajout_prenom;
     @FXML private DatePicker ajout_date;
+    @FXML private Button ajouter_salle_button;
+    @FXML private TextField ajout_nom1;
+    @FXML private TextField ajout_prenom1;
     //fin ajout
 
 
@@ -106,6 +109,7 @@ public class ReservationController {
         setupDeleteButton();
         setupModifyButton();
         setupAjouterButton();
+        setupAjouterSalleButton();
     }
 
     private void setupTableColumns() {
@@ -160,6 +164,10 @@ public class ReservationController {
         ajouter_boutton_verifivation.setOnAction(event -> addReservation());
     }
 
+    private void setupAjouterSalleButton() {
+        ajouter_salle_button.setOnAction(event -> addSalle());
+    }
+
 
     // add reservation
     private void addReservation() {
@@ -179,6 +187,22 @@ public class ReservationController {
         }
         loadReservations();
         animation_slide(add_anchor);
+    }
+
+    // add salle
+    private void addSalle() {
+
+        try {
+            DatabaseController db = new DatabaseController();
+            db.ajouterSalle(new Salle(
+                    ajout_nom1.getText().charAt(0),
+                    Integer.parseInt(ajout_prenom1.getText())
+            ));
+        } catch (SQLException | SalleNotAvailableException e) {
+            showAlert("Erreur", "Échec de l'ajout: " + e.getMessage());
+        }
+        initializeSallesChoiceBox();
+        animation_slide(add_salle_anchor);
     }
 
 
@@ -433,10 +457,10 @@ public class ReservationController {
                 .collect(Collectors.toList());
 
         if (selected.isEmpty()) {
-            showAlert("Aucune sélection", "Veuillez sélectionner au moins une réservation à supprimer");
+            showAlert("Aucune sélection", "Veuillez sélectionner au moins une réservation à modifier");
             return false;
         } else if (selected.size() > 1) {
-            showAlert("Plusieurs sélections", "Veuillez sélectionner juste une réservation à supprimer");
+            showAlert("Plusieurs sélections", "Veuillez sélectionner juste une réservation à modifier");
             return false;
         }
         Reservation reservation = selected.get(0);
