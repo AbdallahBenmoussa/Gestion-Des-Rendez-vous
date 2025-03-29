@@ -165,7 +165,17 @@
     -fx-effect: dropshadow(three-pass-box, #191919, 2, 0.2, 2, 2);
     -fx-border-width: 6px 0 6px 6px;
 }
+#add_salle_anchor{
+    -fx-background-color: #605856;
+    -fx-effect: dropshadow(three-pass-box, #191919, 2, 0.2, 2, 2);
+    -fx-border-width: 6px 0 6px 6px;
+}
 #ajouter_boutton_verifivation{
+    -fx-background-color: #30362F;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+}
+#ajouter_salle_button{
     -fx-background-color: #30362F;
     -fx-text-fill: white;
     -fx-background-radius: 5px;
@@ -181,6 +191,15 @@
     -fx-text-fill: #30362F;
 }
 #b_cancelAjouter:hover{
+    -fx-background-radius: 100%;
+    -fx-text-fill: rgba(143, 186, 142, 1);
+}
+#b_cancelAjouter1{
+    -fx-background-color: transparent;
+    -fx-background-radius: 100%;
+    -fx-text-fill: #30362F;
+}
+#b_cancelAjouter1:hover{
     -fx-background-radius: 100%;
     -fx-text-fill: rgba(143, 186, 142, 1);
 }

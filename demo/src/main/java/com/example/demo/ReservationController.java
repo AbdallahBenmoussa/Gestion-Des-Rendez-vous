@@ -83,6 +83,7 @@ public class ReservationController {
     @FXML private Button confirmer_modification;
     @FXML private Button ajouter_boutton_verifivation;
     @FXML private DatePicker mod_date_picker;
+    @FXML private Pane add_salle_anchor;
 
     // Data and state management
     private ObservableList<Reservation> allReservations;
@@ -454,6 +455,11 @@ public class ReservationController {
     private void toggleAnimation_modifierReservation() {
         if (!fillModPane()) return;
         animation_slide(modify_anchor);
+    }
+
+    @FXML
+    private void toggleAnimation_add_salle_anchor(){
+        animation_slide(add_salle_anchor);
     }
 
     private void showAlert(String title, String message) {
