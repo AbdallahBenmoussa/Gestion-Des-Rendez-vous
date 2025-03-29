@@ -16,6 +16,86 @@
 
 <Pane fx:id="background" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: transparent;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ReservationController">
    <children>
+      <Pane fx:id="modify_anchor" layoutX="-250.0" prefHeight="600.0" prefWidth="247.0">
+         <children>
+            <Text fill="WHITE" layoutX="31.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier une reservation" textAlignment="CENTER" wrappingWidth="189.185546875">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="40.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="39.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salle :">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="40.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="40.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom :">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="40.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durée :">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Text>
+            <Label fx:id="nom_emp" layoutX="84.0" layoutY="111.0" prefHeight="40.0" prefWidth="152.0" text="le nom de lemployeur qui appartien a la reservation" wrapText="true" />
+            <Label fx:id="prenom_emp" layoutX="106.0" layoutY="157.0" prefHeight="68.0" prefWidth="108.0" text="le prenom de lemployeur qui appartien a la reservation" wrapText="true" />
+            <ChoiceBox fx:id="mod_salle_picker" layoutX="83.0" layoutY="244.0" prefWidth="150.0" style="-fx-background-color: #AEAAAB;" />
+            <DatePicker fx:id="mod_date_picker" layoutX="83.0" layoutY="306.0" prefHeight="25.0" prefWidth="149.0" promptText="date de res selectionné" style="-fx-background-color: #AEAAAB;" />
+            <TextField fx:id="mod_duree" layoutX="96.0" layoutY="386.0" prefHeight="25.0" prefWidth="137.0" promptText="duré de res selectionné" style="-fx-background-color: #AEAAAB;" />
+            <Text fill="WHITE" layoutX="15.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temp debut :" wrappingWidth="97.0">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="mod_temp_debut" layoutX="104.0" layoutY="441.0" prefHeight="25.0" prefWidth="137.0" promptText="duré de res selectionné" style="-fx-background-color: #AEAAAB;" />
+            <Button fx:id="confirmer_modification" layoutX="75.0" layoutY="503.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="97.0" text="Confirmer">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="b_cancelModifier" layoutX="205.0" mnemonicParsing="false" onAction="#toggleAnimation_modifierReservation" text="❮">
+               <font>
+                  <Font name="Arial Bold" size="23.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="18.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@profile.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="18.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@profile.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="39.0" layoutX="17.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@door.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="20.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@calendar-1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="20.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@clock.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
       <Pane fx:id="background1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDetected="#initialize" prefHeight="600.0" prefWidth="1000.0">
          <children>
             <AnchorPane fx:id="h1_label" layoutX="48.0" layoutY="8.0" prefHeight="106.0" prefWidth="854.0">
@@ -138,26 +218,25 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="81.0" layoutY="135.0" prefHeight="25.0" prefWidth="158.0" style="-fx-background-color: #AEAAAB;" />
-            <TextField layoutX="101.0" layoutY="185.0" prefHeight="25.0" prefWidth="137.0" style="-fx-background-color: #AEAAAB;" />
-            <ChoiceBox layoutX="80.0" layoutY="273.0" prefHeight="25.0" prefWidth="158.0" style="-fx-background-color: #AEAAAB;" />
+            <TextField fx:id="ajout_nom" layoutX="81.0" layoutY="135.0" prefHeight="25.0" prefWidth="158.0" style="-fx-background-color: #AEAAAB;" />
+            <TextField fx:id="ajout_prenom" layoutX="101.0" layoutY="185.0" prefHeight="25.0" prefWidth="137.0" style="-fx-background-color: #AEAAAB;" />
+            <ChoiceBox fx:id="ajouter_salle_choice" layoutX="80.0" layoutY="273.0" prefHeight="25.0" prefWidth="158.0" style="-fx-background-color: #AEAAAB;" />
             <Text fill="WHITE" layoutX="32.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salle :">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="34.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data :">
+            <Text fill="WHITE" layoutX="34.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="35.0" layoutY="446.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durée :">
+            <Text fill="WHITE" layoutX="35.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durée :">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Text>
-            <DatePicker layoutX="82.0" layoutY="318.0" prefHeight="25.0" prefWidth="158.0" />
-            <ChoiceBox layoutX="89.0" layoutY="426.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #AEAAAB;" />
+            <DatePicker fx:id="ajout_date" layoutX="82.0" layoutY="318.0" prefHeight="25.0" prefWidth="158.0" />
             <Button fx:id="ajouter_boutton_verifivation" layoutX="86.0" layoutY="509.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="83.0" text="Ajouter">
                <font>
                   <Font name="Arial Bold" size="16.0" />
@@ -188,91 +267,18 @@
                   <Image url="@calendar-1.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="13.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="17.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@clock.png" />
                </image>
             </ImageView>
-         </children>
-      </Pane>
-      <Pane fx:id="modify_anchor" layoutX="-250.0" prefHeight="600.0" prefWidth="247.0">
-         <children>
-            <Text fill="WHITE" layoutX="31.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier une reservation" textAlignment="CENTER" wrappingWidth="189.185546875">
-               <font>
-                  <Font name="Arial Bold" size="30.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="40.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">
+            <Text fill="WHITE" layoutX="12.0" layoutY="478.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps début :">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="39.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salle :">
-               <font>
-                  <Font name="Arial Bold" size="14.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="40.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :">
-               <font>
-                  <Font name="Arial Bold" size="14.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="40.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom :">
-               <font>
-                  <Font name="Arial Bold" size="14.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="40.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durée :">
-               <font>
-                  <Font name="Arial Bold" size="14.0" />
-               </font>
-            </Text>
-            <Label fx:id="nom_emp" layoutX="84.0" layoutY="111.0" prefHeight="40.0" prefWidth="152.0" text="le nom de lemployeur qui appartien a la reservation" wrapText="true" />
-            <Label fx:id="prenom_emp" layoutX="106.0" layoutY="157.0" prefHeight="68.0" prefWidth="108.0" text="le prenom de lemployeur qui appartien a la reservation" wrapText="true" />
-            <ChoiceBox fx:id="mod_salle_picker" layoutX="83.0" layoutY="244.0" prefWidth="150.0" style="-fx-background-color: #AEAAAB;" />
-            <DatePicker fx:id="mod_date_picker" layoutX="83.0" layoutY="306.0" prefHeight="25.0" prefWidth="149.0" promptText="date de res selectionné" style="-fx-background-color: #AEAAAB;" />
-            <TextField fx:id="mod_duree" layoutX="96.0" layoutY="386.0" prefHeight="25.0" prefWidth="137.0" promptText="duré de res selectionné" style="-fx-background-color: #AEAAAB;" />
-            <Text fill="WHITE" layoutX="15.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temp debut :" wrappingWidth="97.0">
-               <font>
-                  <Font name="Arial Bold" size="14.0" />
-               </font>
-            </Text>
-            <TextField fx:id="mod_temp_debut" layoutX="104.0" layoutY="441.0" prefHeight="25.0" prefWidth="137.0" promptText="duré de res selectionné" style="-fx-background-color: #AEAAAB;" />
-            <Button fx:id="confirmer_modification" layoutX="75.0" layoutY="503.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="97.0" text="Confirmer">
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="b_cancelModifier" layoutX="205.0" mnemonicParsing="false" onAction="#toggleAnimation_modifierReservation" text="❮">
-               <font>
-                  <Font name="Arial Bold" size="23.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="18.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@profile.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="18.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@profile.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="20.0" fitWidth="39.0" layoutX="17.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@door.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="20.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@calendar-1.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="20.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@clock.png" />
-               </image>
-            </ImageView>
+            <TextField fx:id="ajout_temps_debut" layoutX="110.0" layoutY="447.0" prefHeight="25.0" prefWidth="137.0" style="-fx-background-color: #AEAAAB;" />
+            <TextField fx:id="ajout_duree" layoutX="110.0" layoutY="405.0" prefHeight="25.0" prefWidth="137.0" style="-fx-background-color: #AEAAAB;" />
          </children>
       </Pane>
    </children>

@@ -48,6 +48,15 @@ public class ReservationController {
     @FXML private ChoiceBox<Salle> mod_salle_picker;
     @FXML private Label nom_emp;
     @FXML private Label prenom_emp;
+    @FXML private ChoiceBox<Salle> ajouter_salle_choice;
+    //ajout
+    @FXML private TextField ajout_temps_debut;
+    @FXML private TextField ajout_duree;
+    @FXML private TextField ajout_nom;
+    @FXML private TextField ajout_prenom;
+    @FXML private DatePicker ajout_date;
+    //fin ajout
+
 
     // Panes and anchors
     @FXML private Pane add_anchor;
@@ -89,6 +98,7 @@ public class ReservationController {
         setupSearchListener();
         setupDeleteButton();
         setupModifyButton();
+        setupAjouterButton();
     }
 
     private void setupTableColumns() {
@@ -138,6 +148,33 @@ public class ReservationController {
         confirmer_modification.setOnAction(event -> modifySelectedReservation());
     }
 
+    //this is here for add event handling
+    private void setupAjouterButton() {
+        ajouter_boutton_verifivation.setOnAction(event -> addReservation());
+    }
+
+
+    // add reservation
+    private void addReservation() {
+
+        try {
+            DatabaseController db = new DatabaseController();
+            db.ajouterReservation(new Reservation(
+                    ajout_prenom.getText() + " " + ajout_nom.getText(),
+                    ajouter_salle_choice.getValue(),
+                    Date.valueOf(ajout_date.getValue()),
+                    Time.valueOf(ajout_temps_debut.getText()),
+                    Time.valueOf(ajout_duree.getText())
+
+            ));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        loadReservations();
+        animation_slide(add_anchor);
+    }
+
+
     private void deleteSelectedReservations() {
         List<Reservation> selected = allReservations.stream()
                 .filter(Reservation::isSelected)
@@ -172,6 +209,7 @@ public class ReservationController {
         try {
             DatabaseController db = new DatabaseController();
             mod_salle_picker.setItems(FXCollections.observableList(db.getSalles()));
+            ajouter_salle_choice.setItems(FXCollections.observableList(db.getSalles()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -185,10 +223,10 @@ public class ReservationController {
                 .collect(Collectors.toList());
 
         if (selected.isEmpty()) {
-            showAlert("Aucune sélection", "Veuillez sélectionner au moins une réservation à supprimer");
+            showAlert("Aucune sélection", "Veuillez sélectionner une réservation à modifier");
             return;
         } else if (selected.size() > 1) {
-            showAlert("Plusieurs sélections", "Veuillez sélectionner juste une réservation à supprimer");
+            showAlert("Plusieurs sélections", "Sélectionner juste une réservation à modifier");
         }
 
         Reservation res = selected.get(0);
