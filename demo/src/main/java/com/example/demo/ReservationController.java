@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -17,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -78,11 +80,6 @@ public class ReservationController {
     // Buttons
     @FXML private Button closeButton;
     @FXML private Button minimizeButton;
-    @FXML private Button b_AjoutezReservation;
-    @FXML private Button b_Recherche;
-    @FXML private Button b_VoirLesSalleDisponible;
-    @FXML private Button b_cancelAjouter;
-    @FXML private Button b_cancelModifier;
     @FXML private Button confirmer_modification;
     @FXML private Button ajouter_boutton_verifivation;
     @FXML private DatePicker mod_date_picker;
@@ -367,18 +364,6 @@ public class ReservationController {
         stage.close();
     }
 
-    public void switchToMenu(javafx.event.ActionEvent actionEvent) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("ajouterRendivou.fxml"));
-        stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    private void buttonAjouter() {
-        toggleAnimation_ajoutezReservation();
-    }
 
     @FXML
     private void slideIn(Pane pane) {
@@ -492,9 +477,5 @@ public class ReservationController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    public void exit() {
-        System.exit(0);
     }
 }
