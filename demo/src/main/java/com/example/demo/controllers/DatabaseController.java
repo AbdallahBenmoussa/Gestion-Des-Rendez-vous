@@ -102,9 +102,9 @@ public class DatabaseController {
         String sql = "UPDATE Reservation SET nomEmploye = ?, codeSalle = ?, dateRes = ?, heureDebut = ?, duree = ? WHERE id = ?";
 
         try {
-            if (isSalleDisponible(reservation.getCodeSalle(), reservation.getDateRes(), reservation.getHeureDebut(), reservation.getDuree())) {
-                throw new SalleNotAvailableException();
-            }
+//            if (isSalleDisponible(reservation.getCodeSalle(), reservation.getDateRes(), reservation.getHeureDebut(), reservation.getDuree())) {
+//                throw new SalleNotAvailableException();
+//            }
 
             Connection conn = getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
