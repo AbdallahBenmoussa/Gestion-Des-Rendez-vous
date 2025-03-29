@@ -129,10 +129,16 @@
     -fx-border-color:#605856;
     -fx-border-radius:10px;
     -fx-padding:0px;
+    -fx-table-cell-border-color: transparent;
+}
+.table-view:focused{
+    -fx-background-color:transparent;
+    -fx-border-color:#605856;
+    -fx-border-radius:10px;
+    -fx-padding:0px;
 }
 .table-view .table-column{
     -fx-alignment:CENTER;
-
 }
 .table-view .column-header-background{
     -fx-background-color:#605856;
@@ -147,6 +153,21 @@
     -fx-text-fill:#efeeef;
     -fx-font-family:"Arial";
 }
+.table-row-cell:odd{
+    -fx-background-color: #dedede;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+.table-row-cell:odd:selected{
+    -fx-background-color: #AEAAAB;
+    -fx-background-insets: 0;
+    -fx-table-cell-border-color: transparent;
+ }
+.table-row-cell:even:selected{
+    -fx-background-color: #AEAAAB;
+    -fx-background-insets: 0;
+    -fx-table-cell-border-color: transparent;
+}
+
 
 
 
