@@ -89,7 +89,7 @@
                         <TableColumn fx:id="colEmploye" prefWidth="213.0" text="Employeur" />
                         <TableColumn fx:id="colDateTime" prefWidth="154.0" text="Date" />
                         <TableColumn fx:id="colDuree" prefWidth="122.0" text="Durée" />
-                        <TableColumn fx:id="colAction" prefWidth="84.0" text="Action" />
+                        <TableColumn fx:id="colAction" prefWidth="86.0" text="Action" />
                      </columns>
                   </TableView>
                   <Button fx:id="deleteSelectedButton" layoutX="15.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="171.0" style="-fx-background-color: #ff4444; -fx-text-fill: white;" text="Supprimer la sélection">
@@ -102,7 +102,12 @@
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="searchField" layoutX="267.0" layoutY="11.0" prefHeight="26.0" prefWidth="464.0" promptText="Search by employee, room, or date..." />
+                  <TextField fx:id="searchField" layoutX="274.0" layoutY="12.0" prefHeight="27.0" prefWidth="454.0" promptText="Search by employee, room, or date..." style="-fx-border-color: #605856; -fx-border-radius: 10px; -fx-background-radius: 10px;" />
+                  <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="703.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@magnifying-glass%20(1).png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="exit_label" layoutX="940.0" layoutY="25.0" prefHeight="76.0" prefWidth="52.0">
@@ -238,8 +243,14 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Text>
-            <Label fx:id="nom_emp" layoutX="84.0" layoutY="111.0" prefHeight="40.0" prefWidth="152.0" text="le nom de lemployeur qui appartien a la reservation" wrapText="true" />
-            <Label fx:id="prenom_emp" layoutX="106.0" layoutY="157.0" prefHeight="68.0" prefWidth="108.0" text="le prenom de lemployeur qui appartien a la reservation" wrapText="true" />
+            <Label fx:id="nom_emp" layoutX="83.0" layoutY="117.0" prefHeight="40.0" prefWidth="152.0" text="gdfgfdhfgshfgdhd" textFill="#949494" wrapText="true">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font></Label>
+            <Label fx:id="prenom_emp" layoutX="104.0" layoutY="166.0" prefHeight="35.0" prefWidth="108.0" text="gdfhgfdhgfdjhg" textFill="#949494" wrapText="true">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font></Label>
             <ChoiceBox fx:id="mod_salle_picker" layoutX="83.0" layoutY="244.0" prefWidth="150.0" style="-fx-background-color: #AEAAAB;" />
             <DatePicker fx:id="mod_date_picker" layoutX="87.0" layoutY="306.0" prefHeight="25.0" prefWidth="145.0" promptText="date de res selectionné" style="-fx-background-color: #AEAAAB;" />
             <TextField fx:id="mod_duree" layoutX="109.0" layoutY="386.0" prefHeight="25.0" prefWidth="124.0" promptText="duré de res selectionné" style="-fx-background-color: #AEAAAB;" />
