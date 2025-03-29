@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,103 +14,255 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDetected="#initialize" prefHeight="600.0" prefWidth="950.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ReservationController">
+<Pane fx:id="background" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: transparent;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ReservationController">
    <children>
-      <AnchorPane fx:id="h1_label" layoutX="16.0" layoutY="14.0" prefHeight="106.0" prefWidth="854.0">
+      <Pane fx:id="background1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDetected="#initialize" prefHeight="600.0" prefWidth="1000.0">
          <children>
-            <Text fill="#8bbeb2" layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue Dans La De Salle " wrappingWidth="352.13671875">
+            <AnchorPane fx:id="h1_label" layoutX="48.0" layoutY="14.0" prefHeight="106.0" prefWidth="854.0">
+               <children>
+                  <Text fill="#efeeef" layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue Dans La De Salle " wrappingWidth="352.13671875">
+                     <font>
+                        <Font name="Arial Bold" size="38.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#605856" layoutX="376.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion Des Reservations">
+                     <font>
+                        <Font name="Arial Bold" size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="left_anchorpane" layoutX="23.0" layoutY="136.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="367.0" prefWidth="164.0">
+               <children>
+                  <Button fx:id="b_VoirLesSalleDisponible" layoutX="16.0" layoutY="173.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="124.0" text="Voire Les           Salle             Disponible" textFill="#48404C" wrapText="true">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="b_AjoutezReservation" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="18.0" mnemonicParsing="false" onAction="#toggleAnimation_ajoutezReservation" prefHeight="60.0" prefWidth="124.0" text="Ajoutez Une Reservation" textFill="#48404C" wrapText="true">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="b_Recherche" layoutX="16.0" layoutY="95.0" mnemonicParsing="false" onAction="#toggleAnimation_modifierReservation" prefHeight="60.0" prefWidth="124.0" text="Modifier une reservation" textFill="#48404C" wrapText="true">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="25.0" fitWidth="31.0" layoutX="107.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@plus%20(2).png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="31.0" layoutX="106.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@edit-text.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="35.0" fitWidth="31.0" layoutX="104.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@search-file.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="76.0" fitWidth="83.0" layoutX="43.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@calendar.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="LeftBottom_anchor" layoutX="23.0" layoutY="516.0" prefHeight="68.0" prefWidth="164.0">
+               <children>
+                  <Text fill="#605856" layoutX="10.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USTO-MB">
+                     <font>
+                        <Font name="Arial Bold" size="31.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="table_anchor" layoutX="212.0" layoutY="136.0" prefHeight="448.0" prefWidth="763.0">
+               <children>
+                  <TableView fx:id="reservationTable" layoutX="16.0" layoutY="46.0" prefHeight="385.0" prefWidth="727.0">
+                     <columns>
+                        <TableColumn fx:id="colId" prefWidth="82.0" text="Reservation" />
+                        <TableColumn fx:id="colSalle" prefWidth="59.0" text="Salle" />
+                        <TableColumn fx:id="colEmploye" prefWidth="214.0" text="Employeur" />
+                        <TableColumn fx:id="colDateTime" prefWidth="159.0" text="Date" />
+                        <TableColumn fx:id="colDuree" prefWidth="108.0" text="Durée" />
+                        <TableColumn fx:id="Action" prefWidth="104.0" text="Action" />
+                     </columns>
+                  </TableView>
+                  <Text fill="#605856" layoutX="16.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les réservations existantes :">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="searchField" layoutX="480.0" layoutY="10.0" prefHeight="25.0" prefWidth="259.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="exit_label" layoutX="940.0" layoutY="25.0" prefHeight="76.0" prefWidth="52.0">
+               <children>
+                  <Button fx:id="closeButton" minHeight="-Infinity" minWidth="52.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="35.0" prefWidth="60.0" text="❌" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Light" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="minimizeButton" layoutY="37.0" minHeight="-Infinity" minWidth="52.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="39.0" prefWidth="60.0" text="➖" textFill="#fff0f0">
+                     <font>
+                        <Font name="Arial" size="31.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </Pane>
+      <Pane fx:id="add_anchor" layoutX="-250.0" prefHeight="600.0" prefWidth="247.0">
+         <children>
+            <Text fill="WHITE" layoutX="45.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajoutez une reservation" textAlignment="CENTER" wrappingWidth="164.0">
                <font>
-                  <Font name="Arial Bold" size="38.0" />
+                  <Font name="Arial Bold" size="28.0" />
                </font>
             </Text>
-            <Text fill="#e6f9af" layoutX="376.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion Des Reservations">
+            <Label layoutX="34.0" layoutY="141.0" text="Nom :" textFill="WHITE">
                <font>
-                  <Font name="Arial Bold" size="36.0" />
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="34.0" layoutY="191.0" text="Prénom :" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField layoutX="81.0" layoutY="135.0" prefHeight="25.0" prefWidth="158.0" style="-fx-background-color: #AEAAAB;" />
+            <TextField layoutX="101.0" layoutY="185.0" prefHeight="25.0" prefWidth="137.0" style="-fx-background-color: #AEAAAB;" />
+            <ChoiceBox layoutX="80.0" layoutY="273.0" prefHeight="25.0" prefWidth="158.0" style="-fx-background-color: #AEAAAB;" />
+            <Text fill="WHITE" layoutX="32.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salle :">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
                </font>
             </Text>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="left_anchorpane" layoutX="14.0" layoutY="136.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="367.0" prefWidth="164.0">
-         <children>
-            <Button fx:id="b_VoirLesSalleDisponible" layoutX="16.0" layoutY="98.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="124.0" text="Voire Les           Salle             Disponible" textFill="#384e77" wrapText="true">
+            <Text fill="WHITE" layoutX="34.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data :">
                <font>
-                  <Font name="Arial Bold" size="13.0" />
-               </font>
-            </Button>
-            <Button fx:id="b_AjoutezReservation" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="18.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="124.0" text="Ajoutez Une Reservation" textFill="#384e77" wrapText="true">
-               <font>
-                  <Font name="Arial Bold" size="13.0" />
-               </font>
-            </Button>
-            <Button fx:id="b_Recherche" layoutX="16.0" layoutY="187.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="124.0" text="Recherche Avancée" textFill="#384e77" wrapText="true">
-               <font>
-                  <Font name="Arial Bold" size="13.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="35.0" fitWidth="40.0" layoutX="100.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@correct.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="52.0" fitWidth="55.0" layoutX="92.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@plus.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="100.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@search.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="93.0" fitWidth="94.0" layoutX="32.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@reserve.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="LeftBottom_anchor" layoutX="14.0" layoutY="518.0" prefHeight="68.0" prefWidth="164.0">
-         <children>
-            <Text fill="#e6f9af" layoutX="10.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USTO-MB">
-               <font>
-                  <Font name="Arial Bold" size="31.0" />
+                  <Font name="Arial Bold" size="14.0" />
                </font>
             </Text>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="table_anchor" layoutX="202.0" layoutY="136.0" prefHeight="448.0" prefWidth="728.0">
-         <children>
-            <TableView layoutX="16.0" layoutY="46.0" prefHeight="385.0" prefWidth="695.0">
-              <columns>
-                <TableColumn prefWidth="82.0" text="Reservation" />
-                <TableColumn prefWidth="59.0" text="Salle" />
-                  <TableColumn prefWidth="178.0" text="Employeur" />
-                  <TableColumn prefWidth="121.0" text="Date" />
-                  <TableColumn prefWidth="89.0" text="Heure" />
-                  <TableColumn prefWidth="65.0" text="Durée" />
-                  <TableColumn prefWidth="100.0" text="Action" />
-              </columns>
-            </TableView>
-            <Text fill="#8bbeb2" layoutX="16.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les réservations existantes :">
+            <Text fill="WHITE" layoutX="35.0" layoutY="446.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durée :">
                <font>
-                  <Font name="Arial Bold" size="18.0" />
+                  <Font name="Arial Bold" size="14.0" />
                </font>
             </Text>
+            <DatePicker layoutX="82.0" layoutY="318.0" prefHeight="25.0" prefWidth="158.0" />
+            <ChoiceBox layoutX="89.0" layoutY="426.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #AEAAAB;" />
+            <Button fx:id="ajouter_boutton_verifivation" layoutX="86.0" layoutY="509.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="83.0" text="Ajouter">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="b_cancelAjouter" layoutX="205.0" layoutY="-1.0" mnemonicParsing="false" onAction="#toggleAnimation_ajoutezReservation" text="❮">
+               <font>
+                  <Font name="Arial Bold" size="23.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="9.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@profile.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="9.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@profile.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="25.0" layoutX="10.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@door.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="12.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@calendar%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="13.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@clock.png" />
+               </image>
+            </ImageView>
          </children>
-      </AnchorPane>
-      <AnchorPane fx:id="exit_label" layoutX="890.0" layoutY="25.0" prefHeight="76.0" prefWidth="52.0">
+      </Pane>
+      <Pane fx:id="modify_anchor" layoutX="-250.0" prefHeight="600.0" prefWidth="247.0">
          <children>
-            <Button fx:id="closeButton" minHeight="-Infinity" minWidth="52.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="35.0" prefWidth="60.0" text="❌">
+            <Text fill="WHITE" layoutX="31.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier une reservation" textAlignment="CENTER" wrappingWidth="189.185546875">
                <font>
-                  <Font name="Calibri Light" size="13.0" />
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="40.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="39.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salle :">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="40.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="40.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom :">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="40.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durée :">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Text>
+            <Label layoutX="84.0" layoutY="111.0" prefHeight="40.0" prefWidth="152.0" text="le nom de lemployeur qui appartien a la reservation" wrapText="true" />
+            <Label layoutX="106.0" layoutY="157.0" prefHeight="68.0" prefWidth="108.0" text="le prenom de lemployeur qui appartien a la reservation" wrapText="true" />
+            <ChoiceBox layoutX="83.0" layoutY="244.0" prefWidth="150.0" style="-fx-background-color: #AEAAAB;" />
+            <DatePicker layoutX="83.0" layoutY="306.0" prefHeight="25.0" prefWidth="149.0" promptText="date de res selectionné" style="-fx-background-color: #AEAAAB;" />
+            <TextField layoutX="96.0" layoutY="386.0" prefHeight="25.0" prefWidth="137.0" promptText="duré de res selectionné" style="-fx-background-color: #AEAAAB;" />
+            <Button fx:id="confirmer_modification" layoutX="75.0" layoutY="503.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="97.0" text="Confirmer">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="minimizeButton" layoutY="37.0" minHeight="-Infinity" minWidth="52.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="39.0" prefWidth="60.0" text="➖">
+            <Button fx:id="b_cancelModifier" layoutX="205.0" mnemonicParsing="false" onAction="#toggleAnimation_modifierReservation" text="❮">
                <font>
-                  <Font name="Arial" size="31.0" />
+                  <Font name="Arial Bold" size="23.0" />
                </font>
             </Button>
+            <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="18.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@profile.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="18.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@profile.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="39.0" layoutX="17.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@door.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="20.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@calendar%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="20.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@clock.png" />
+               </image>
+            </ImageView>
          </children>
-      </AnchorPane>
+      </Pane>
    </children>
 </Pane>

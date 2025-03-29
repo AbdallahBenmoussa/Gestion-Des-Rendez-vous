@@ -1,42 +1,148 @@
 package com.example.demo;
 
+import com.example.demo.controllers.DatabaseController;
+import com.example.demo.models.Reservation;
+import javafx.animation.*;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javax.swing.text.html.ImageView;
+import javafx.util.Duration;
+
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 public class ReservationController {
 
+    // UI Components
+    @FXML private TableView<Reservation> reservationTable;
+    @FXML private TableColumn<Reservation, Integer> colId;
+    @FXML private TableColumn<Reservation, String> colSalle;
+    @FXML private TableColumn<Reservation, String> colEmploye;
+    @FXML private TableColumn<Reservation, String> colDateTime;
+    @FXML private TableColumn<Reservation, String> colDuree;
+    @FXML private TableColumn<?, ?> Action;
+    @FXML private TextField searchField;
 
+    // Panes and anchors
+    @FXML private Pane add_anchor;
+    @FXML private Pane modify_anchor;
+    @FXML private Pane background;
+    @FXML private AnchorPane LeftBottom_anchor;
+    @FXML private AnchorPane left_anchorpane;
+    @FXML private AnchorPane table_anchor;
+    @FXML private AnchorPane h1_label;
+    @FXML private AnchorPane exit_label;
+
+    // Buttons
+    @FXML private Button closeButton;
+    @FXML private Button minimizeButton;
+    @FXML private Button b_AjoutezReservation;
+    @FXML private Button b_Recherche;
+    @FXML private Button b_VoirLesSalleDisponible;
+    @FXML private Button b_cancelAjouter;
+    @FXML private Button b_cancelModifier;
+    @FXML private Button confirmer_modification;
+    @FXML private Button ajouter_boutton_verifivation;
+
+    // Data and state management
+    private ObservableList<Reservation> allReservations;
+    private FilteredList<Reservation> filteredReservations;
     private double xOffset = 0;
     private double yOffset = 0;
     private Stage stage;
     private Scene scene;
     private Parent root;
 
+    @FXML
+    public void initialize() {
+        setupTableColumns();
+        setupWindowDrag();
+        loadReservations();
+        setupSearchListener();
+    }
 
-    @FXML
-    private Button ajouerButton;
-    @FXML
-    private Button modifferButton;
-    @FXML
-    private Pane background;
-    @FXML
-    private Button suppButton;
-    @FXML
-    private ImageView ajouterImage;
-    @FXML
-    private Button exitButton;
-    @FXML
-    private Button minimizeButton;
-    @FXML
-    private Button closeButton;
+    private void setupTableColumns() {
+        colId.setCellValueFactory(new PropertyValueFactory<>("numRes"));
+        colSalle.setCellValueFactory(new PropertyValueFactory<>("codeSalle"));
+        colEmploye.setCellValueFactory(new PropertyValueFactory<>("nomEmp"));
+
+        colDateTime.setCellValueFactory(cellData -> {
+            Reservation res = cellData.getValue();
+            return new SimpleStringProperty(res.getDateTimeFormatted());
+        });
+
+        colDuree.setCellValueFactory(cellData -> {
+            Reservation res = cellData.getValue();
+            return new SimpleStringProperty(res.getDureeFormatted());
+        });
+    }
+
+    private void setupWindowDrag() {
+        background.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        background.setOnMouseDragged(event -> {
+            Stage stage = (Stage) background.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
+    }
+
+    private void loadReservations() {
+        try {
+            DatabaseController db = new DatabaseController();
+            List<Reservation> reservations = db.getReservations();
+            allReservations = FXCollections.observableArrayList(reservations);
+            filteredReservations = new FilteredList<>(allReservations);
+            reservationTable.setItems(filteredReservations);
+        } catch (SQLException e) {
+            showAlert("Database Error", "Failed to load reservations: " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            showAlert("Error", "Unexpected error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void setupSearchListener() {
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredReservations.setPredicate(reservation -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (String.valueOf(reservation.getNumRes()).contains(lowerCaseFilter)) {
+                    return true;
+                } else if (reservation.getNomEmp().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (reservation.getCodeSalle().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (reservation.getDateTimeFormatted().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (reservation.getDureeFormatted().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+    }
 
     @FXML
     private void minimizeWindow() {
@@ -59,17 +165,91 @@ public class ReservationController {
     }
 
     @FXML
-    private void initialize() {
-        // Rendre la fenêtre déplaçable
-        background.setOnMousePressed(event -> {
-            xOffset = event.getSceneX();
-            yOffset = event.getSceneY();
-        });
-        background.setOnMouseDragged(event -> {
-            Stage stage = (Stage) background.getScene().getWindow();
-            stage.setX(event.getScreenX() - xOffset);
-            stage.setY(event.getScreenY() - yOffset);
-        });
+    private void buttonAjouter() {
+        toggleAnimation_ajoutezReservation();
+    }
+
+    @FXML
+    private void slideIn(Pane pane) {
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), pane);
+        slide.setToX(250);
+        slide.play();
+    }
+
+    @FXML
+    private void slideOut(Pane pane) {
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), pane);
+        slide.setToX(0);
+        slide.play();
+    }
+
+    public void togglePane(Pane pane, boolean enable) {
+        FadeTransition fade = new FadeTransition(Duration.millis(500), pane);
+        if (enable) {
+            pane.setDisable(false);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+        } else {
+            fade.setFromValue(1);
+            fade.setToValue(0);
+            fade.setOnFinished(e -> pane.setDisable(true));
+        }
+        fade.play();
+    }
+
+    @FXML
+    private void animation_slide(Pane pane) {
+        if (pane.getTranslateX() == 0) {
+            togglePane(left_anchorpane, false);
+            togglePane(LeftBottom_anchor, false);
+            TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), table_anchor);
+            slide.setToX(28);
+            slide.play();
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(0.5), table_anchor);
+            scaleTransition.setToX(0.93);
+            scaleTransition.play();
+            ScaleTransition scaleTransition2 = new ScaleTransition(Duration.seconds(0.5), h1_label);
+            scaleTransition2.setToX(0.77);
+            scaleTransition2.play();
+            TranslateTransition slide2 = new TranslateTransition(Duration.seconds(0.5), h1_label);
+            slide2.setToX(120);
+            slide2.play();
+            slideIn(pane);
+        } else {
+            togglePane(left_anchorpane, true);
+            togglePane(LeftBottom_anchor, true);
+            TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), table_anchor);
+            slide.setToX(0);
+            slide.play();
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(0.5), table_anchor);
+            scaleTransition.setToX(1);
+            scaleTransition.play();
+            ScaleTransition scaleTransition2 = new ScaleTransition(Duration.seconds(0.5), h1_label);
+            scaleTransition2.setToX(1);
+            scaleTransition2.play();
+            TranslateTransition slide2 = new TranslateTransition(Duration.seconds(0.5), h1_label);
+            slide2.setToX(0);
+            slide2.play();
+            slideOut(pane);
+        }
+    }
+
+    @FXML
+    private void toggleAnimation_ajoutezReservation() {
+        animation_slide(add_anchor);
+    }
+
+    @FXML
+    private void toggleAnimation_modifierReservation() {
+        animation_slide(modify_anchor);
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public void exit() {

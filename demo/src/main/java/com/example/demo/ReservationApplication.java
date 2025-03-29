@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class ReservationApplication extends Application {
 
@@ -20,7 +21,7 @@ public class ReservationApplication extends Application {
             String css = getClass().getResource("/com/example/demo/Style.css").toExternalForm();
             scene.getStylesheets().add(css);
             stage.setScene(scene);
-            root.setStyle("-fx-border-color: #E6F9AF; -fx-border-width: 4px;");
+            root.setStyle("-fx-border-color: #605856; -fx-border-width: 4px;");
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setTitle("Reservation Application");
             stage.setResizable(false);
