@@ -78,7 +78,9 @@ public class Reservation {
     }
 
     private int generateId() {
-        return (salle.getBatiment() + salle.getCodeSalle() +
-                dateRes.toString() + heureDebut.toString()).hashCode();
+        return (int)Long.parseLong((int)salle.getBatiment()
+                + salle.getCodeSalle().substring(1)
+                + dateRes.toString().replaceAll("-", "")
+                + heureDebut.toString().replaceAll(":", ""));
     }
 }
