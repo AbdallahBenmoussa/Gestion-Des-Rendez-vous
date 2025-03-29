@@ -18,9 +18,9 @@
    <children>
       <Pane fx:id="background1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDetected="#initialize" prefHeight="600.0" prefWidth="1000.0">
          <children>
-            <AnchorPane fx:id="h1_label" layoutX="48.0" layoutY="14.0" prefHeight="106.0" prefWidth="854.0">
+            <AnchorPane fx:id="h1_label" layoutX="48.0" layoutY="8.0" prefHeight="106.0" prefWidth="854.0">
                <children>
-                  <Text fill="#efeeef" layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue Dans La De Salle " wrappingWidth="352.13671875">
+                  <Text fill="#efeeef" layoutX="14.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue Dans La De Salle " wrappingWidth="352.13671875">
                      <font>
                         <Font name="Arial Bold" size="38.0" />
                      </font>
@@ -51,7 +51,7 @@
                   </Button>
                   <ImageView fitHeight="25.0" fitWidth="31.0" layoutX="107.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@plus%20(2).png" />
+                        <Image url="@plus.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="25.0" fitWidth="31.0" layoutX="106.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
@@ -80,24 +80,29 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="table_anchor" layoutX="212.0" layoutY="136.0" prefHeight="448.0" prefWidth="763.0">
+            <AnchorPane fx:id="table_anchor" layoutX="222.0" layoutY="117.0" prefHeight="471.0" prefWidth="745.0">
                <children>
-                  <TableView fx:id="reservationTable" layoutX="16.0" layoutY="46.0" prefHeight="385.0" prefWidth="727.0">
+                  <TableView fx:id="reservationTable" layoutX="14.0" layoutY="46.0" prefHeight="385.0" prefWidth="727.0">
                      <columns>
                         <TableColumn fx:id="colId" prefWidth="82.0" text="Reservation" />
                         <TableColumn fx:id="colSalle" prefWidth="59.0" text="Salle" />
                         <TableColumn fx:id="colEmploye" prefWidth="214.0" text="Employeur" />
                         <TableColumn fx:id="colDateTime" prefWidth="159.0" text="Date" />
                         <TableColumn fx:id="colDuree" prefWidth="108.0" text="Durée" />
-                        <TableColumn fx:id="Action" prefWidth="104.0" text="Action" />
+                        <TableColumn fx:id="colAction" prefWidth="104.0" text="Action" />
                      </columns>
                   </TableView>
+                  <Button fx:id="deleteSelectedButton" layoutX="21.0" layoutY="436.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="171.0" style="-fx-background-color: #ff4444; -fx-text-fill: white;" text="Supprimer la sélection">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Button>
                   <Text fill="#605856" layoutX="16.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les réservations existantes :">
                      <font>
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="searchField" layoutX="480.0" layoutY="10.0" prefHeight="25.0" prefWidth="259.0" />
+                  <TextField fx:id="searchField" layoutX="267.0" layoutY="12.0" prefHeight="26.0" prefWidth="477.0" promptText="Search by employee, room, or date..." />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="exit_label" layoutX="940.0" layoutY="25.0" prefHeight="76.0" prefWidth="52.0">
@@ -180,7 +185,7 @@
             </ImageView>
             <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="12.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@calendar%20(1).png" />
+                  <Image url="@calendar-1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="13.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true">
@@ -254,7 +259,7 @@
             </ImageView>
             <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="20.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@calendar%20(1).png" />
+                  <Image url="@calendar-1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="20.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
