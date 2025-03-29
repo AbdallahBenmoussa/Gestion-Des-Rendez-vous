@@ -34,7 +34,7 @@
             </AnchorPane>
             <AnchorPane fx:id="left_anchorpane" layoutX="23.0" layoutY="136.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="367.0" prefWidth="164.0">
                <children>
-                  <Button fx:id="b_VoirLesSalleDisponible" layoutX="16.0" layoutY="173.0" mnemonicParsing="false" onAction="#toggleAnimation_add_salle_anchor" prefHeight="68.0" prefWidth="124.0" text="Ajouter Une Salle" textFill="#48404C" wrapText="true">
+                  <Button fx:id="b_VoirLesSalleDisponible" layoutX="16.0" layoutY="174.0" mnemonicParsing="false" onAction="#toggleAnimation_add_salle_anchor" prefHeight="68.0" prefWidth="124.0" text="Ajouter Une Salle" textFill="#48404C" wrapText="true">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font>
@@ -59,7 +59,7 @@
                         <Image url="@edit-text.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="35.0" fitWidth="31.0" layoutX="104.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="105.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@plus%20(2).png" />
                      </image>

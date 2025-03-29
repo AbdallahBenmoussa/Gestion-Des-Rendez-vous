@@ -10,7 +10,7 @@ import java.util.List;
 public class DatabaseController {
     private static final String URL = "jdbc:mysql://localhost:3306/reservations";
     private static final String USER = "root"; // Change to your MySQL username
-    private static final String PASSWORD = "azertyuiop"; // Change to your MySQL password
+    private static final String PASSWORD = "Yasser2005"; // Change to your MySQL password
 
     public Connection getConnection() throws SQLException {
         try {
