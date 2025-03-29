@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.exceptions.SalleNotAvailableException;
 import com.example.demo.models.Reservation;
 import com.example.demo.models.Salle;
 import java.sql.*;
@@ -19,12 +20,30 @@ public class DatabaseController {
         }
     }
 
-    public void ajouterReservation(Reservation reservation) throws SQLException {
+    // checks if a salle is available
+    /*private boolean isReservationAvailable(Reservation reservation) {
+        String sql = "SELECT * FROM Reservation WHERE dateRes = ? AND heureDebut BETWEEN ? AND ? + duree";
+        try (Connection connection = getConnection()){
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setDate(1, reservation.getDateRes());
+            ps.setTime(2, reservation.getHeureDebut());
+            ps.setTime(3, reservation.getHeureDebut());
+            ResultSet rs = ps.executeQuery();
+            return !rs.next();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }*/
+
+    public void ajouterReservation(Reservation reservation) throws SQLException, SalleNotAvailableException {
         String sql = "INSERT INTO Reservation (id, nomEmploye, codeSalle, dateRes, heureDebut, duree) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
+        try {
+            if (!isSalleDisponible(reservation.getCodeSalle(), reservation.getDateRes(), reservation.getHeureDebut(), reservation.getDuree())) {
+                throw new SalleNotAvailableException();
+            }
+            Connection conn = getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, reservation.getNumRes());
             ps.setString(2, reservation.getNomEmp());
             ps.setString(3, reservation.getCodeSalle());
@@ -79,11 +98,16 @@ public class DatabaseController {
         }
     }
 
-    public void modifierReservation(Reservation reservation) throws SQLException {
+    public void modifierReservation(Reservation reservation) throws SQLException, SalleNotAvailableException {
         String sql = "UPDATE Reservation SET nomEmploye = ?, codeSalle = ?, dateRes = ?, heureDebut = ?, duree = ? WHERE id = ?";
 
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try {
+            if (isSalleDisponible(reservation.getCodeSalle(), reservation.getDateRes(), reservation.getHeureDebut(), reservation.getDuree())) {
+                throw new SalleNotAvailableException();
+            }
+
+            Connection conn = getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setString(1, reservation.getNomEmp());
             ps.setString(2, reservation.getCodeSalle());
@@ -160,7 +184,7 @@ public class DatabaseController {
     }
 
     //Testing
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         try {
             DatabaseController db = new DatabaseController();
             System.out.println("Connection successful! Found rooms: " + db.getSalles().size());
@@ -175,5 +199,5 @@ public class DatabaseController {
         } catch (SQLException e) {
             System.err.println("ERROR: " + e.getMessage());
         }
-    }
+    }*/
 }

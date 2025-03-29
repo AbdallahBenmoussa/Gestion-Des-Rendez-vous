@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.controllers.DatabaseController;
+import com.example.demo.exceptions.SalleNotAvailableException;
 import com.example.demo.models.Reservation;
 import com.example.demo.models.Salle;
 import javafx.animation.*;
@@ -94,6 +95,7 @@ public class ReservationController {
 
     @FXML
     public void initialize() {
+        ajout_date.setValue(LocalDate.now());
         setupTableColumns();
         setupWindowDrag();
         loadReservations();
@@ -171,8 +173,8 @@ public class ReservationController {
                     Time.valueOf(ajout_duree.getText())
 
             ));
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | SalleNotAvailableException e) {
+            showAlert("Erreur", "Échec de l'ajout: " + e.getMessage());
         }
         loadReservations();
         animation_slide(add_anchor);
@@ -267,8 +269,8 @@ public class ReservationController {
 
                 ));
                 loadReservations();
-            } catch (SQLException e) {
-                showAlert("Erreur", "Échec de la suppression: " + e.getMessage());
+            } catch (SQLException | SalleNotAvailableException e) {
+                showAlert("Erreur", "Échec de la modification: " + e.getMessage());
             }
         }
         animation_slide(modify_anchor);
