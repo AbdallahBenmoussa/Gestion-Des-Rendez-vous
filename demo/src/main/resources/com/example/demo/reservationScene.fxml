@@ -227,11 +227,17 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Text>
-            <Label layoutX="84.0" layoutY="111.0" prefHeight="40.0" prefWidth="152.0" text="le nom de lemployeur qui appartien a la reservation" wrapText="true" />
-            <Label layoutX="106.0" layoutY="157.0" prefHeight="68.0" prefWidth="108.0" text="le prenom de lemployeur qui appartien a la reservation" wrapText="true" />
-            <ChoiceBox layoutX="83.0" layoutY="244.0" prefWidth="150.0" style="-fx-background-color: #AEAAAB;" />
-            <DatePicker layoutX="83.0" layoutY="306.0" prefHeight="25.0" prefWidth="149.0" promptText="date de res selectionné" style="-fx-background-color: #AEAAAB;" />
-            <TextField layoutX="96.0" layoutY="386.0" prefHeight="25.0" prefWidth="137.0" promptText="duré de res selectionné" style="-fx-background-color: #AEAAAB;" />
+            <Label fx:id="nom_emp" layoutX="84.0" layoutY="111.0" prefHeight="40.0" prefWidth="152.0" text="le nom de lemployeur qui appartien a la reservation" wrapText="true" />
+            <Label fx:id="prenom_emp" layoutX="106.0" layoutY="157.0" prefHeight="68.0" prefWidth="108.0" text="le prenom de lemployeur qui appartien a la reservation" wrapText="true" />
+            <ChoiceBox fx:id="mod_salle_picker" layoutX="83.0" layoutY="244.0" prefWidth="150.0" style="-fx-background-color: #AEAAAB;" />
+            <DatePicker fx:id="mod_date_picker" layoutX="83.0" layoutY="306.0" prefHeight="25.0" prefWidth="149.0" promptText="date de res selectionné" style="-fx-background-color: #AEAAAB;" />
+            <TextField fx:id="mod_duree" layoutX="96.0" layoutY="386.0" prefHeight="25.0" prefWidth="137.0" promptText="duré de res selectionné" style="-fx-background-color: #AEAAAB;" />
+            <Text fill="WHITE" layoutX="15.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temp debut :" wrappingWidth="97.0">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="mod_temp_debut" layoutX="104.0" layoutY="441.0" prefHeight="25.0" prefWidth="137.0" promptText="duré de res selectionné" style="-fx-background-color: #AEAAAB;" />
             <Button fx:id="confirmer_modification" layoutX="75.0" layoutY="503.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="97.0" text="Confirmer">
                <font>
                   <Font name="Arial Bold" size="15.0" />

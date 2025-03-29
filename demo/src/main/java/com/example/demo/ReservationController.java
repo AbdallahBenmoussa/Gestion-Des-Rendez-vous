@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.example.demo.controllers.DatabaseController;
 import com.example.demo.models.Reservation;
+import com.example.demo.models.Salle;
 import javafx.animation.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -22,7 +23,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,6 +43,11 @@ public class ReservationController {
     @FXML private TableColumn<Reservation, Void> colAction;
     @FXML private TextField searchField;
     @FXML private Button deleteSelectedButton;
+    @FXML private TextField mod_duree;
+    @FXML private TextField mod_temp_debut;
+    @FXML private ChoiceBox<Salle> mod_salle_picker;
+    @FXML private Label nom_emp;
+    @FXML private Label prenom_emp;
 
     // Panes and anchors
     @FXML private Pane add_anchor;
@@ -60,6 +69,7 @@ public class ReservationController {
     @FXML private Button b_cancelModifier;
     @FXML private Button confirmer_modification;
     @FXML private Button ajouter_boutton_verifivation;
+    @FXML private DatePicker mod_date_picker;
 
     // Data and state management
     private ObservableList<Reservation> allReservations;
@@ -75,8 +85,10 @@ public class ReservationController {
         setupTableColumns();
         setupWindowDrag();
         loadReservations();
+        initializeSallesChoiceBox();
         setupSearchListener();
         setupDeleteButton();
+        setupModifyButton();
     }
 
     private void setupTableColumns() {
@@ -121,6 +133,11 @@ public class ReservationController {
         deleteSelectedButton.setOnAction(event -> deleteSelectedReservations());
     }
 
+    // this is here for modification event handling
+    private void setupModifyButton() {
+        confirmer_modification.setOnAction(event -> modifySelectedReservation());
+    }
+
     private void deleteSelectedReservations() {
         List<Reservation> selected = allReservations.stream()
                 .filter(Reservation::isSelected)
@@ -148,6 +165,59 @@ public class ReservationController {
                 showAlert("Erreur", "Échec de la suppression: " + e.getMessage());
             }
         }
+    }
+
+    // fills the salles choice box with data
+    private void initializeSallesChoiceBox() {
+        try {
+            DatabaseController db = new DatabaseController();
+            mod_salle_picker.setItems(FXCollections.observableList(db.getSalles()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    //this is here to modify the selected reservations
+    private void modifySelectedReservation() {
+        List<Reservation> selected = allReservations.stream()
+                .filter(Reservation::isSelected)
+                .collect(Collectors.toList());
+
+        if (selected.isEmpty()) {
+            showAlert("Aucune sélection", "Veuillez sélectionner au moins une réservation à supprimer");
+            return;
+        } else if (selected.size() > 1) {
+            showAlert("Plusieurs sélections", "Veuillez sélectionner juste une réservation à supprimer");
+        }
+
+        Reservation res = selected.get(0);
+
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("Confirmation de modification");
+        confirmation.setHeaderText("Modifier la reservation");
+        confirmation.setContentText("Êtes-vous sûr de vouloir modifier la réservation?");
+
+        Optional<ButtonType> result = confirmation.showAndWait();
+        // put the modified reservation in the db
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                DatabaseController db = new DatabaseController();
+                db.modifierReservation(new Reservation(
+                        res.getNumRes(),
+                        res.getNomEmp(),
+                        mod_salle_picker.getValue(),
+                        Date.valueOf(mod_date_picker.getValue()),
+                        Time.valueOf(mod_temp_debut.getText()),
+                        Time.valueOf(mod_duree.getText())
+
+                ));
+                loadReservations();
+            } catch (SQLException e) {
+                showAlert("Erreur", "Échec de la suppression: " + e.getMessage());
+            }
+        }
+        animation_slide(modify_anchor);
     }
 
     private void setupWindowDrag() {
@@ -299,8 +369,34 @@ public class ReservationController {
         animation_slide(add_anchor);
     }
 
+    // this is here to fill the mod pane with the reservation's data
+    private boolean fillModPane() {
+        List<Reservation> selected = allReservations.stream()
+                .filter(Reservation::isSelected)
+                .collect(Collectors.toList());
+
+        if (selected.isEmpty()) {
+            showAlert("Aucune sélection", "Veuillez sélectionner au moins une réservation à supprimer");
+            return false;
+        } else if (selected.size() > 1) {
+            showAlert("Plusieurs sélections", "Veuillez sélectionner juste une réservation à supprimer");
+            return false;
+        }
+        Reservation reservation = selected.get(0);
+
+        nom_emp.setText(reservation.getNomEmp().split(" ")[0]);
+        prenom_emp.setText(reservation.getNomEmp().split(" ")[1]);
+        mod_salle_picker.setValue(reservation.getSalle());
+        mod_date_picker.setValue(reservation.getDateRes().toLocalDate());
+        mod_temp_debut.setText(reservation.getHeureDebut().toString());
+        mod_duree.setText(reservation.getDuree().toString());
+
+        return true;
+    }
+
     @FXML
     private void toggleAnimation_modifierReservation() {
+        if (!fillModPane()) return;
         animation_slide(modify_anchor);
     }
 

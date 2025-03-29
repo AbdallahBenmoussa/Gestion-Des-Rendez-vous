@@ -19,4 +19,9 @@ public class Salle {
     public int getNumSalle() {
         return numSalle;
     }
+
+    @Override
+    public String toString() {
+        return getCodeSalle();
+    }
 }
