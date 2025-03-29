@@ -21,11 +21,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.util.converter.DateTimeStringConverter;
 
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -95,6 +98,7 @@ public class ReservationController {
         setupWindowDrag();
         loadReservations();
         initializeSallesChoiceBox();
+        initializeTimeTextFields();
         setupSearchListener();
         setupDeleteButton();
         setupModifyButton();
@@ -215,7 +219,19 @@ public class ReservationController {
         }
 
     }
+    // initializes the time textfields
+    private void initializeTimeTextFields() {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+            ajout_duree.setTextFormatter(new TextFormatter<>(new DateTimeStringConverter(format), format.parse("00:00:00")));
+            ajout_temps_debut.setTextFormatter(new TextFormatter<>(new DateTimeStringConverter(format), format.parse("00:00:00")));
+            mod_temp_debut.setTextFormatter(new TextFormatter<>(new DateTimeStringConverter(format), format.parse("00:00:00")));
+            mod_duree.setTextFormatter(new TextFormatter<>(new DateTimeStringConverter(format), format.parse("00:00:00")));
 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
     //this is here to modify the selected reservations
     private void modifySelectedReservation() {
         List<Reservation> selected = allReservations.stream()
